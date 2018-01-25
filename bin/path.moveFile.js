@@ -1,4 +1,5 @@
 const { renameSync } = require("fs");
+const { basename, dirname  } = require('path');
 
 module.exports = (oldPath, newPath) => {
   if (!oldPath || !newPath) {
@@ -7,7 +8,7 @@ module.exports = (oldPath, newPath) => {
   }
   try {
     renameSync(oldPath, newPath);
-    console.log(`Moviendo Archivo... ${oldPath}`);
+    console.log(`mv ${basename(oldPath)}  ->  ${basename(dirname(newPath))}`);
   } catch (error) {
     console.log(error);
   }
