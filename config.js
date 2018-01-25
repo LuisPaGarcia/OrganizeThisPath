@@ -1,54 +1,47 @@
-const path = require("path");
 const { join } = require("path");
-const OriginPath = path.join(require("os").homedir(), "downloads");
-let OriPathF = value => (join(OriginPath), value);
-module.exports = {
+const OriginPath = join(require("os").homedir(), "downloads");
+let OriPathF = value => (join(OriginPath, value));
+
+
+let config = {
   path: OriginPath,
   ext: {
     Documents: {
-      group: "Documents",
-      exts: ["doc", "docx", "pdf", "xls", "xlsx", "ppt", "pptx", "pps", "csv"],
-      destiny: OriPathF("Documents")
+      exts: ["doc", "docx", "pdf", "xls", "xlsx", "ppt", "pptx", "pps", "csv"]
     },
     Compress: {
-      group: "Compress",
-      exts: ["zip", "rar", "7z", "gz"],
-      destiny: OriPathF("Compress")
+      exts: ["zip", "rar", "7z", "gz"]
     },
     Media: {
-      group: "Media",
-      exts: ["mp3", "mp4", "avi"],
-      destiny: OriPathF("Media")
+      exts: ["mp3", "mp4", "avi"]
     },
     Applications: {
-      group: "Applications",
-      exts: ["exe", "msi"],
-      destiny: OriPathF("Applications")
+      exts: ["exe", "msi"]
     },
     Images: {
-      group: "Images",
-      exts: ["jpg", "jpeg", "png", "gif"],
-      destiny: OriPathF("Images")
+      exts: ["jpg", "jpeg", "png", "gif"]
     },
     Torrents: {
-      group: "Torrents",
-      exts: ["torrent"],
-      destiny: OriPathF("Torrents")
+      exts: ["torrent"]
     },
     ISO: {
-      group: "ISO",
-      exts: ["iso"],
-      destiny: OriPathF("iso")
+      exts: ["iso"]
     },
     Keys: {
-      group: "Keys AWS",
-      exts: ["ppk", "pem"],
-      destiny: OriPathF("Keys AWS")
+      exts: ["ppk", "pem"]
     },
     Development: {
-      group: "Development",
-      exts: ["sql"],
-      destiny: OriPathF("Development")
+      exts: ["sql"]
     }
   }
 };
+
+let configReady = config =>{
+  for(var key in config.ext){
+    config.ext[key].group = key;
+    config.ext[key].destiny = OriPathF(config.ext[key].group);
+  }
+}
+configReady(config)
+
+module.exports = config
